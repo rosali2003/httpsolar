@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>httpsolarthatgoldendoodle.dog</title>
+  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: #fdf8f2;
+      color: #2d1b00;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #c8973a;
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-bottom: 4px solid #8b5e1a;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      color: #ffe8b8;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .paw {
+      font-size: 36px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ffe8b8 0%, #fdf0d5 100%);
+      padding: 60px 40px;
+      text-align: center;
+      border-bottom: 2px solid #e8c878;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      color: #5c3510;
+      margin-bottom: 12px;
+    }
+
+    .hero code {
+      font-family: 'Courier New', monospace;
+      background: #5c3510;
+      color: #ffe8b8;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+
+    .hero p {
+      margin-top: 16px;
+      color: #7a4a20;
+      font-size: 16px;
+    }
+
+    .grid-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    .category {
+      margin-bottom: 48px;
+    }
+
+    .category h3 {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #c8973a;
+      border-bottom: 2px solid #e8c878;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .status-card {
+      background: #fff;
+      border: 2px solid #e8c878;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .status-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(139, 94, 26, 0.15);
+      border-color: #c8973a;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      background: #fdf0d5;
+    }
+
+    .card-info {
+      padding: 12px 14px;
+    }
+
+    .card-code {
+      font-family: 'Courier New', monospace;
+      font-size: 22px;
+      font-weight: bold;
+      color: #5c3510;
+    }
+
+    .card-name {
+      font-size: 12px;
+      color: #7a4a20;
+      margin-top: 2px;
+    }
+
+    .card-code.success { color: #2d7a2d; }
+    .card-code.redirect { color: #7a5c00; }
+    .card-code.client-error { color: #8b2000; }
+    .card-code.server-error { color: #5c0000; }
+
+    .card-image.success { background: #e8f5e8; }
+    .card-image.redirect { background: #fff8e0; }
+    .card-image.client-error { background: #ffeee8; }
+    .card-image.server-error { background: #ffe8e8; }
+
+    footer {
+      background: #2d1b00;
+      color: #c8973a;
+      text-align: center;
+      padding: 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    footer a { color: #ffe8b8; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="paw">🐾</div>
+  <div>
+    <h1>httpsolarthatgoldendoodle.dog</h1>
+    <p>HTTP status codes, illustrated by Solar the Goldendoodle</p>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>Solar says it all 🐶</h2>
+  <code>https://httpsolarthatgoldendoodle.dog/<span style="color:#f0b840">404</span></code>
+  <p>Just add a status code to the URL &mdash; Solar has a face for every situation.</p>
+</div>
+
+<div class="grid-section">
+
+  <div class="category">
+    <h3>2xx &mdash; Success (Solar is a very good girl)</h3>
+    <div class="status-grid">
+      <a class="status-card" href="/200">
+        <div class="card-image success">😊</div>
+        <div class="card-info">
+          <div class="card-code success">200</div>
+          <div class="card-name">OK</div>
+        </div>
+      </a>
+      <a class="status-card" href="/201">
+        <div class="card-image success">🎉</div>
+        <div class="card-info">
+          <div class="card-code success">201</div>
+          <div class="card-name">Created</div>
+        </div>
+      </a>
+      <a class="status-card" href="/204">
+        <div class="card-image success">😶</div>
+        <div class="card-info">
+          <div class="card-code success">204</div>
+          <div class="card-name">No Content</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="category">
+    <h3>3xx &mdash; Redirection (Solar is confused)</h3>
+    <div class="status-grid">
+      <a class="status-card" href="/301">
+        <div class="card-image redirect">🔄</div>
+        <div class="card-info">
+          <div class="card-code redirect">301</div>
+          <div class="card-name">Moved Permanently</div>
+        </div>
+      </a>
+      <a class="status-card" href="/302">
+        <div class="card-image redirect">↩️</div>
+        <div class="card-info">
+          <div class="card-code redirect">302</div>
+          <div class="card-name">Found</div>
+        </div>
+      </a>
+      <a class="status-card" href="/304">
+        <div class="card-image redirect">😑</div>
+        <div class="card-info">
+          <div class="card-code redirect">304</div>
+          <div class="card-name">Not Modified</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="category">
+    <h3>4xx &mdash; Client Errors (Solar is disappointed in you)</h3>
+    <div class="status-grid">
+      <a class="status-card" href="/400">
+        <div class="card-image client-error">😕</div>
+        <div class="card-info">
+          <div class="card-code client-error">400</div>
+          <div class="card-name">Bad Request</div>
+        </div>
+      </a>
+      <a class="status-card" href="/401">
+        <div class="card-image client-error">🚫</div>
+        <div class="card-info">
+          <div class="card-code client-error">401</div>
+          <div class="card-name">Unauthorized</div>
+        </div>
+      </a>
+      <a class="status-card" href="/403">
+        <div class="card-image client-error">😤</div>
+        <div class="card-info">
+          <div class="card-code client-error">403</div>
+          <div class="card-name">Forbidden</div>
+        </div>
+      </a>
+      <a class="status-card" href="/404">
+        <div class="card-image client-error">🐾</div>
+        <div class="card-info">
+          <div class="card-code client-error">404</div>
+          <div class="card-name">Not Found</div>
+        </div>
+      </a>
+      <a class="status-card" href="/429">
+        <div class="card-image client-error">😩</div>
+        <div class="card-info">
+          <div class="card-code client-error">429</div>
+          <div class="card-name">Too Many Requests</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="category">
+    <h3>5xx &mdash; Server Errors (Solar has no idea what happened)</h3>
+    <div class="status-grid">
+      <a class="status-card" href="/500">
+        <div class="card-image server-error">😱</div>
+        <div class="card-info">
+          <div class="card-code server-error">500</div>
+          <div class="card-name">Internal Server Error</div>
+        </div>
+      </a>
+      <a class="status-card" href="/502">
+        <div class="card-image server-error">😵</div>
+        <div class="card-info">
+          <div class="card-code server-error">502</div>
+          <div class="card-name">Bad Gateway</div>
+        </div>
+      </a>
+      <a class="status-card" href="/503">
+        <div class="card-image server-error">💤</div>
+        <div class="card-info">
+          <div class="card-code server-error">503</div>
+          <div class="card-name">Service Unavailable</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Made with 🐾 and 🐶 &mdash; <a href="https://httpsolarthatgoldendoodle.dog">httpsolarthatgoldendoodle.dog</a></p>
+  <p style="margin-top:4px; color:#7a5c30">Inspired by <a href="https://http.cat">http.cat</a></p>
+</footer>
+
+</body>
+</html>

@@ -37,7 +37,7 @@ export async function getImageStream(
   
   try {
     const response = await s3.send(
-      new GetObjectCommand({ Bucket: bucket, Key: key })
+      new GetObjectCommand({ Bucket: bucket, Key: key, ResponseContentType: "image/jpeg" })
     );
     return {
       body: response.Body as Readable,

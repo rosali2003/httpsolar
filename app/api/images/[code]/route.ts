@@ -7,20 +7,22 @@ export async function GET(
   { params }: { params: Promise<{ code: string }> }
 ) {
   const { code } = await params;
-  console.log("code", code);
   const statusCode = Number(code);
 
   if (!Number.isInteger(statusCode) || statusCode < 100 || statusCode > 599) {
+    console.log("Invalid status code", statusCode);
     return new NextResponse("Invalid status code", { status: 400 });
   }
 
   const key = await getImageKey(statusCode);
   if (!key) {
+    console.log("Image status not found", statusCode);
     return new NextResponse("Image status not found", { status: 404 });
   }
 
   const image = await getImageStream(key);
   if (!image) {
+    console.log("Could not find image", statusCode);
     return new NextResponse("Could not find image", { status: 404 });
   }
 
@@ -34,5 +36,6 @@ export async function GET(
 
   // Convert Node.js Readable to Web ReadableStream
   const webStream = Readable.toWeb(image.body) as ReadableStream;
+  console.log("Returning image", statusCode);
   return new NextResponse(webStream, { headers });
 }

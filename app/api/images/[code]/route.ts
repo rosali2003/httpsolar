@@ -27,7 +27,7 @@ export async function GET(
   }
 
   const headers: HeadersInit = {
-    "Content-Type": image.contentType,
+    "Content-Type": "image/jpeg",
     "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
   };
   if (image.contentLength) {

@@ -15,12 +15,12 @@ export async function GET(
 
   const key = await getImageKey(statusCode);
   if (!key) {
-    return new NextResponse("Image not found", { status: 404 });
+    return new NextResponse("Image status not found", { status: 404 });
   }
 
   const image = await getImageStream(key);
   if (!image) {
-    return new NextResponse("Image not found", { status: 404 });
+    return new NextResponse("Could not find image", { status: 404 });
   }
 
   const headers: HeadersInit = {

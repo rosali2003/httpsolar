@@ -18,7 +18,8 @@ export async function getImageKey(code: number): Promise<string | null> {
     try {
       await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
       return key;
-    } catch {
+    } catch (error) {
+      console.error(`Error getting image key for ${code}.${ext}:`, error);
       // not found, try next extension
     }
   }
@@ -38,7 +39,8 @@ export async function getImageStream(
       contentType: response.ContentType ?? "image/jpeg",
       contentLength: response.ContentLength,
     };
-  } catch {
+  } catch (error) {
+    console.error(`Error getting image stream for ${key}:`, error);
     return null;
   }
 }

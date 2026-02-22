@@ -7,6 +7,7 @@ export async function GET(
   { params }: { params: Promise<{ code: string }> }
 ) {
   const { code } = await params;
+  console.log("code", code);
   const statusCode = Number(code);
 
   if (!Number.isInteger(statusCode) || statusCode < 100 || statusCode > 599) {

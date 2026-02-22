@@ -22,20 +22,10 @@ function getBucket(): string {
 
 /** Returns the S3 key for a status code image, trying .jpg then .jpeg. */
 export async function getImageKey(code: number): Promise<string | null> {
-  const s3 = getS3Client();
-  const bucket = getBucket();
-  
-  for (const ext of ["jpg", "jpeg"]) {
-    const key = `${code}.${ext}`;
-    try {
-      await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
-      return key;
-    } catch (error) {
-      console.error(`Error getting image key for ${code}.${ext}:`, error);
-      // not found, try next extension
-    }
+  if (code === 200) {
+    return "200.jpg";
   }
-  return null;
+  return `${code}.jpeg`;
 }
 
 /** Streams an S3 object. Returns null if the key doesn't exist. */

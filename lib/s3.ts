@@ -44,7 +44,8 @@ export async function getImageStream(
       contentType: response.ContentType ?? "image/jpeg",
       contentLength: response.ContentLength,
     };
-  } catch {
+  } catch (error) {
+    console.error(`Error getting image stream for ${key}:`, error);
     return null;
   }
 }

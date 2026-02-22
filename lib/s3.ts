@@ -30,7 +30,8 @@ export async function getImageKey(code: number): Promise<string | null> {
     try {
       await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
       return key;
-    } catch {
+    } catch (error) {
+      console.error(`Error getting image key for ${code}.${ext}:`, error);
       // not found, try next extension
     }
   }

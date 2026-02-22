@@ -1,25 +1,36 @@
 import { S3Client, GetObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s3";
 import { Readable } from "stream";
 
-export const s3 = new S3Client({
-  region: process.env.AWS_REGION!,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
+let s3Client: S3Client | null = null;
 
-const BUCKET = process.env.S3_BUCKET_NAME!;
+function getS3Client(): S3Client {
+  if (!s3Client) {
+    s3Client = new S3Client({
+      region: process.env.AWS_REGION!,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      },
+    });
+  }
+  return s3Client;
+}
 
-/** Returns the S3 key for a status code image, trying .jpg then .png. */
+function getBucket(): string {
+  return process.env.S3_BUCKET_NAME!;
+}
+
+/** Returns the S3 key for a status code image, trying .jpg then .jpeg. */
 export async function getImageKey(code: number): Promise<string | null> {
-  for (const ext of ["jpg", "jpeg", "png", "gif", "webp"]) {
+  const s3 = getS3Client();
+  const bucket = getBucket();
+  
+  for (const ext of ["jpg", "jpeg"]) {
     const key = `${code}.${ext}`;
     try {
-      await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
+      await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
       return key;
-    } catch (error) {
-      console.error(`Error getting image key for ${code}.${ext}:`, error);
+    } catch {
       // not found, try next extension
     }
   }
@@ -30,17 +41,19 @@ export async function getImageKey(code: number): Promise<string | null> {
 export async function getImageStream(
   key: string
 ): Promise<{ body: Readable; contentType: string; contentLength?: number } | null> {
+  const s3 = getS3Client();
+  const bucket = getBucket();
+  
   try {
     const response = await s3.send(
-      new GetObjectCommand({ Bucket: BUCKET, Key: key })
+      new GetObjectCommand({ Bucket: bucket, Key: key })
     );
     return {
       body: response.Body as Readable,
       contentType: response.ContentType ?? "image/jpeg",
       contentLength: response.ContentLength,
     };
-  } catch (error) {
-    console.error(`Error getting image stream for ${key}:`, error);
+  } catch {
     return null;
   }
 }

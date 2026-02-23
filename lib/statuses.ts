@@ -18,7 +18,7 @@ export const STATUS_CATEGORIES: StatusCategory[] = [
   {
     id: "success",
     label: "2xx",
-    tagline: "Solar is a very good boy",
+    tagline: "Solar is a very good girl",
     statuses: [
       { code: 200, name: "OK", emoji: "😊", category: "success" },
       { code: 201, name: "Created", emoji: "🎉", category: "success" },

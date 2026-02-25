@@ -25,6 +25,9 @@ export async function getImageKey(code: number): Promise<string | null> {
   if (code === 200) {
     return "200.jpg";
   }
+  if (code === 307) {
+    return "307.gif";
+  }
   return `${code}.jpeg`;
 }
 

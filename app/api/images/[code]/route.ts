@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getImageKey, getImageStream } from "@/lib/s3";
-import { Readable } from "stream";
+import { getImageFilename } from "@/lib/images";
 
 export async function GET(
   _req: NextRequest,
@@ -10,32 +9,13 @@ export async function GET(
   const statusCode = Number(code);
 
   if (!Number.isInteger(statusCode) || statusCode < 100 || statusCode > 599) {
-    console.log("Invalid status code", statusCode);
     return new NextResponse("Invalid status code", { status: 400 });
   }
 
-  const key = await getImageKey(statusCode);
-  if (!key) {
-    console.log("Image status not found", statusCode);
-    return new NextResponse("Image status not found", { status: 404 });
+  const filename = getImageFilename(statusCode);
+  if (!filename) {
+    return new NextResponse("Image not found", { status: 404 });
   }
 
-  const image = await getImageStream(key);
-  if (!image) {
-    console.log("Could not find image", statusCode);
-    return new NextResponse("Could not find image", { status: 404 });
-  }
-
-  const headers: HeadersInit = {
-    "Content-Type": "image/jpeg",
-    "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
-  };
-  if (image.contentLength) {
-    headers["Content-Length"] = String(image.contentLength);
-  }
-
-  // Convert Node.js Readable to Web ReadableStream
-  const webStream = Readable.toWeb(image.body) as ReadableStream;
-  console.log("Returning image", statusCode);
-  return new NextResponse(webStream, { headers });
+  return NextResponse.redirect(new URL(`/images/${filename}`, _req.url), 307);
 }

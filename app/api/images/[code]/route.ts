@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getImageFilename } from "@/lib/images";
+import { getImageFilename, getS3ImageUrl } from "@/lib/images";
 
 export async function GET(
   _req: NextRequest,
@@ -10,6 +10,11 @@ export async function GET(
 
   if (!Number.isInteger(statusCode) || statusCode < 100 || statusCode > 599) {
     return new NextResponse("Invalid status code", { status: 400 });
+  }
+
+  const s3Url = getS3ImageUrl(statusCode);
+  if (s3Url) {
+    return NextResponse.redirect(s3Url, 307);
   }
 
   const filename = getImageFilename(statusCode);

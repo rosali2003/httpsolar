@@ -41,4 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 # large images served from S3
+public/images/308.gif
 public/images/501.gif
